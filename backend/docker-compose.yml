@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: blood_bank_app
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - .:/var/www/html
     environment:
