@@ -8,19 +8,14 @@ use App\Repositories\BloodRepository;
 
 class InventoryController extends ResourceController
 {
-    protected $bloodService;
-    protected $bloodRepo;
-
-    public function __construct()
-    {
-        $this->bloodService = new BloodService();
-        $this->bloodRepo = new BloodRepository();
-    }
+    protected $bloodService = null;
+    protected $bloodRepo = null;
 
     public function index()
     {
         $user = $this->request->user;
         try {
+            $this->bloodService = new BloodService();
             $data = $this->bloodService->getHospitalInventory($user['profile_id']);
             return $this->respond([
                 'success' => true,
@@ -55,6 +50,7 @@ class InventoryController extends ResourceController
         $user = $this->request->user;
 
         try {
+            $this->bloodService = new BloodService();
             $this->bloodService->addSample($user['profile_id'], $data);
             return $this->respond([
                 'success' => true,
@@ -88,13 +84,15 @@ class InventoryController extends ResourceController
         $data = $this->request->getJSON(true);
         $user = $this->request->user;
 
-        // Verify ownership
-        $sample = $this->bloodRepo->findById($id);
-        if (!$sample || $sample['hospital_id'] != $user['profile_id']) {
-            return $this->respond(['success' => false, 'message' => 'Not found or unauthorized'], 404);
-        }
-
         try {
+            $this->bloodRepo = new BloodRepository();
+
+            // Verify ownership
+            $sample = $this->bloodRepo->findById($id);
+            if (!$sample || $sample['hospital_id'] != $user['profile_id']) {
+                return $this->respond(['success' => false, 'message' => 'Not found or unauthorized'], 404);
+            }
+
             $this->bloodRepo->update($id, [
                 'units_available' => $data['units_available'],
                 'expiry_date'     => $data['expiry_date']
@@ -114,6 +112,7 @@ class InventoryController extends ResourceController
         $user = $this->request->user;
 
         try {
+            $this->bloodRepo = new BloodRepository();
             $deleted = $this->bloodRepo->delete($id, $user['profile_id']);
             if (!$deleted) {
                 return $this->respond(['success' => false, 'message' => 'Failed to delete or unauthorized'], 400);

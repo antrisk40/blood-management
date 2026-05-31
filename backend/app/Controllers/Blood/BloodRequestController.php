@@ -7,12 +7,7 @@ use App\Services\RequestService;
 
 class BloodRequestController extends ResourceController
 {
-    protected $requestService;
-
-    public function __construct()
-    {
-        $this->requestService = new RequestService();
-    }
+    protected $requestService = null;
 
     public function create()
     {
@@ -33,6 +28,7 @@ class BloodRequestController extends ResourceController
         $user = $this->request->user; // Set by AuthFilter
 
         try {
+            $this->requestService = new RequestService();
             // $user['profile_id'] contains the receiver_id
             $this->requestService->requestSample($user['profile_id'], $data['blood_sample_id'], $data['units_requested']);
             return $this->respond([

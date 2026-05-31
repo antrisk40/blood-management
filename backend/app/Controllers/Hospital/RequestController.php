@@ -7,18 +7,14 @@ use App\Services\RequestService;
 
 class RequestController extends ResourceController
 {
-    protected $requestService;
-
-    public function __construct()
-    {
-        $this->requestService = new RequestService();
-    }
+    protected $requestService = null;
 
     public function index()
     {
         $user = $this->request->user;
         
         try {
+            $this->requestService = new RequestService();
             $data = $this->requestService->getHospitalRequests($user['profile_id']);
             return $this->respond([
                 'success' => true,
@@ -38,6 +34,7 @@ class RequestController extends ResourceController
         $user = $this->request->user;
         
         try {
+            $this->requestService = new RequestService();
             $this->requestService->markAsDelivered($id, $user['profile_id']);
             return $this->respond([
                 'success' => true,

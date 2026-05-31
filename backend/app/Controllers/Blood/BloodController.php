@@ -7,16 +7,12 @@ use App\Services\BloodService;
 
 class BloodController extends ResourceController
 {
-    protected $bloodService;
-
-    public function __construct()
-    {
-        $this->bloodService = new BloodService();
-    }
+    protected $bloodService = null;
 
     public function index()
     {
         try {
+            $this->bloodService = new BloodService();
             $data = $this->bloodService->getPublicList();
             return $this->respond([
                 'success' => true,

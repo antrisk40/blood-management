@@ -7,12 +7,7 @@ use App\Services\AuthService;
 
 class LoginController extends ResourceController
 {
-    protected $authService;
-
-    public function __construct()
-    {
-        $this->authService = new AuthService();
-    }
+    protected $authService = null;
 
     public function login()
     {
@@ -32,6 +27,7 @@ class LoginController extends ResourceController
         $data = $this->request->getJSON(true);
 
         try {
+            $this->authService = new AuthService();
             $result = $this->authService->login($data['username'], $data['password']);
             return $this->respond([
                 'success' => true,

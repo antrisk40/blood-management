@@ -7,12 +7,7 @@ use App\Services\AuthService;
 
 class RegisterController extends ResourceController
 {
-    protected $authService;
-
-    public function __construct()
-    {
-        $this->authService = new AuthService();
-    }
+    protected $authService = null;
 
     public function hospital()
     {
@@ -34,6 +29,7 @@ class RegisterController extends ResourceController
         }
 
         try {
+            $this->authService = new AuthService();
             $this->authService->registerHospital($this->request->getJSON(true));
             return $this->respond([
                 'success' => true,
@@ -68,6 +64,7 @@ class RegisterController extends ResourceController
         }
 
         try {
+            $this->authService = new AuthService();
             $this->authService->registerReceiver($this->request->getJSON(true));
             return $this->respond([
                 'success' => true,
