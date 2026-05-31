@@ -14,7 +14,7 @@ interface BloodRequest {
 }
 
 export default function HospitalRequestsPage() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ['hospital-requests'],
     queryFn: async () => {
       const response = await apiClient.get('/hospital/requests');
