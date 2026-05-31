@@ -8,10 +8,8 @@ services:
     container_name: blood_bank_app
     ports:
       - "8081:80"
-    volumes:
-      - .:/var/www/html
     environment:
-      - CI_ENVIRONMENT=development
+      - CI_ENVIRONMENT=production
       - database.default.hostname=db
       - database.default.database=blood_bank
       - database.default.username=root
