@@ -24,6 +24,7 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -61,7 +62,7 @@ export default function LoginForm() {
             {...register('username')}
             type="text"
             className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm px-3 py-2 border ${errors.username ? 'border-red-500' : ''}`}
-            placeholder="Enter username"
+            placeholder="Enter username or email"
           />
           {errors.username && <p className="mt-1 text-sm text-red-600">{errors.username.message}</p>}
         </div>
@@ -87,6 +88,32 @@ export default function LoginForm() {
       >
         {isSubmitting ? <Loader2 className="animate-spin h-5 w-5" /> : 'Sign In'}
       </button>
+
+      <div className="mt-6 pt-6 border-t border-gray-100">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Demo Credentials (Click to prefill)</p>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => {
+              setValue('username', 'admin@medanta.in');
+              setValue('password', '12345678');
+            }}
+            className="flex-1 text-xs bg-gray-50 text-gray-600 hover:bg-gray-100 py-2 px-2.5 rounded border border-gray-200 transition-colors font-medium text-center"
+          >
+            🏥 Hospital Admin
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setValue('username', 'neeleshbaghel40@gmail.com');
+              setValue('password', '12345678');
+            }}
+            className="flex-1 text-xs bg-gray-50 text-gray-600 hover:bg-gray-100 py-2 px-2.5 rounded border border-gray-200 transition-colors font-medium text-center"
+          >
+            👤 General User
+          </button>
+        </div>
+      </div>
     </form>
   );
 }
