@@ -27,7 +27,7 @@ class InventoryController extends ResourceController
                 'message' => 'Inventory retrieved successfully',
                 'data'    => $data
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => 'Failed to retrieve inventory'
@@ -61,7 +61,7 @@ class InventoryController extends ResourceController
                 'message' => 'Blood sample added successfully',
                 'data'    => []
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => $e->getMessage()
@@ -104,7 +104,7 @@ class InventoryController extends ResourceController
                 'message' => 'Blood sample updated successfully',
                 'data'    => []
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond(['success' => false, 'message' => $e->getMessage()], 400);
         }
     }
@@ -123,7 +123,7 @@ class InventoryController extends ResourceController
                 'message' => 'Blood sample deleted successfully',
                 'data'    => []
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond(['success' => false, 'message' => $e->getMessage()], 400);
         }
     }

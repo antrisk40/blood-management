@@ -38,7 +38,7 @@ class LoginController extends ResourceController
                 'message' => 'Login successful',
                 'data'    => $result
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => $e->getMessage()

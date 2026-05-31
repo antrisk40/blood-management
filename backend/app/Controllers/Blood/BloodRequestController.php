@@ -40,7 +40,7 @@ class BloodRequestController extends ResourceController
                 'message' => 'Blood request submitted successfully',
                 'data'    => []
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => $e->getMessage()

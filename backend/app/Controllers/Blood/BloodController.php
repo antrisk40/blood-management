@@ -23,7 +23,7 @@ class BloodController extends ResourceController
                 'message' => 'Available blood samples retrieved successfully',
                 'data'    => $data
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => 'Failed to retrieve available blood samples'

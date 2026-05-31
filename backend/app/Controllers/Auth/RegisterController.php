@@ -40,7 +40,7 @@ class RegisterController extends ResourceController
                 'message' => 'Hospital registered successfully',
                 'data'    => []
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => $e->getMessage()
@@ -74,7 +74,7 @@ class RegisterController extends ResourceController
                 'message' => 'Receiver registered successfully',
                 'data'    => []
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => $e->getMessage()

@@ -25,7 +25,7 @@ class RequestController extends ResourceController
                 'message' => 'Requests retrieved successfully',
                 'data'    => $data
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => 'Failed to retrieve requests'
@@ -44,7 +44,7 @@ class RequestController extends ResourceController
                 'message' => 'Request marked as delivered successfully',
                 'data'    => []
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->respond([
                 'success' => false,
                 'message' => $e->getMessage()
