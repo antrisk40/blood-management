@@ -102,4 +102,14 @@ class Cors extends BaseConfig
          */
         'maxAge' => 7200,
     ];
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $allowedOrigins = env('CORS_ALLOWED_ORIGINS');
+        if (!empty($allowedOrigins)) {
+            $this->default['allowedOrigins'] = array_map('trim', explode(',', $allowedOrigins));
+        }
+    }
 }
