@@ -95,19 +95,22 @@ class AuthService
 
         // Fetch role specific ID
         $profileId = null;
+        $bloodGroup = null;
         if ($userData['role'] === 'hospital') {
             $hospital = $this->hospitalRepo->findByUserId($userData['id']);
             $profileId = $hospital['id'] ?? null;
         } else {
             $receiver = $this->receiverRepo->findByUserId($userData['id']);
             $profileId = $receiver['id'] ?? null;
+            $bloodGroup = $receiver['blood_group'] ?? null;
         }
 
         $payload = [
             'id' => $userData['id'],
             'profile_id' => $profileId,
             'username' => $userData['username'],
-            'role' => $userData['role']
+            'role' => $userData['role'],
+            'blood_group' => $bloodGroup
         ];
 
         return [

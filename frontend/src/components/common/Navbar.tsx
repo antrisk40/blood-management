@@ -54,8 +54,13 @@ export default function Navbar() {
               </div>
             ) : (
               <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-500">
-                  Welcome, <span className="font-medium text-gray-900">{user?.username}</span>
+                <span className="text-sm text-gray-500 flex items-center gap-2">
+                  <span>Welcome, <span className="font-medium text-gray-900">{user?.username}</span></span>
+                  {user?.role === 'receiver' && user?.blood_group && (
+                    <span className="bg-red-100 text-red-800 text-xs px-2 py-0.5 rounded-full font-semibold border border-red-200">
+                      {user.blood_group}
+                    </span>
+                  )}
                 </span>
                 <button
                   onClick={handleLogout}

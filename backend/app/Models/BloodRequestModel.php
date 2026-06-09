@@ -12,7 +12,7 @@ class BloodRequestModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['receiver_id', 'blood_sample_id', 'status', 'requested_at'];
+    protected $allowedFields    = ['receiver_id', 'blood_sample_id', 'units_requested', 'status', 'requested_at'];
 
     protected $useTimestamps = true; // For requested_at, but we'll manage it carefully
     protected $dateFormat    = 'datetime';

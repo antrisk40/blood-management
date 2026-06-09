@@ -6,6 +6,7 @@ interface User {
   profile_id: number;
   username: string;
   role: 'hospital' | 'receiver';
+  blood_group?: string | null;
 }
 
 interface AuthState {
